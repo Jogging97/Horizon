@@ -9,8 +9,7 @@
     "max_tokens": 8192,
     "throttle_sec": 1,
     "languages": [
-      "zh",
-      "en"
+      "zh"
     ],
     "analysis_concurrency": 5,
     "enrichment_concurrency": 5
@@ -20,56 +19,61 @@
       {
         "type": "user_events",
         "username": "karpathy",
-        "enabled": true
+        "enabled": true,
+        "category": "ai-oss"
       },
       {
         "type": "repo_releases",
         "owner": "vllm-project",
         "repo": "vllm",
-        "enabled": true
+        "enabled": true,
+        "category": "ai-oss"
       },
       {
         "type": "repo_releases",
         "owner": "sgl-project",
         "repo": "sglang",
-        "enabled": true
+        "enabled": true,
+        "category": "ai-oss"
       },
       {
         "type": "repo_releases",
         "owner": "triton-lang",
         "repo": "triton",
-        "enabled": true
+        "enabled": true,
+        "category": "ai-oss"
       }
     ],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 150
+      "min_score": 150,
+      "category": "tech"
     },
     "rss": [
       {
         "name": "Simon Willison",
         "url": "https://simonwillison.net/atom/everything/",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "ai"
       },
       {
         "name": "GitHub Trending - Daily",
         "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
         "enabled": true,
-        "category": "github-trending"
+        "category": "tech"
       },
       {
         "name": "Semianalysis",
         "url": "https://newsletter.semianalysis.com/feed",
         "enabled": true,
-        "category": "semiconductors"
+        "category": "ai"
       },
       {
         "name": "LWN.net",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
+        "url": "https://lwn.net/headlines/rss",
         "enabled": true,
-        "category": "linux-kernel"
+        "category": "tech"
       }
     ],
     "reddit": {
@@ -81,7 +85,8 @@
           "sort": "hot",
           "time_filter": "day",
           "fetch_limit": 10,
-          "min_score": 60
+          "min_score": 60,
+          "category": "ai"
         },
         {
           "subreddit": "LocalLLaMA",
@@ -89,7 +94,8 @@
           "sort": "hot",
           "time_filter": "day",
           "fetch_limit": 10,
-          "min_score": 60
+          "min_score": 60,
+          "category": "ai"
         }
       ],
       "users": [],
@@ -101,14 +107,63 @@
         {
           "channel": "zaihuapd",
           "enabled": true,
-          "fetch_limit": 20
+          "fetch_limit": 20,
+          "category": "ai-tech"
         }
       ]
+    },
+    "gdelt": {
+      "enabled": true,
+      "query": "\"artificial intelligence\" OR technology OR finance OR geopolitics OR \"China policy\"",
+      "mode": "ArtList",
+      "max_records": 50,
+      "timespan": "24h",
+      "language": "english",
+      "country": null,
+      "category": "international"
+    },
+    "google_news": {
+      "enabled": true,
+      "query": "人工智能 OR 大模型 OR 科技 OR 财经 OR 国内政策 OR 国际新闻",
+      "language": "zh-CN",
+      "country": "CN",
+      "ceid": "CN:zh-Hans",
+      "max_results": 60,
+      "category": "china-news"
     }
   },
   "filtering": {
-    "ai_score_threshold": 8.0,
-    "time_window_hours": 24
+    "ai_score_threshold": 7.0,
+    "time_window_hours": 24,
+    "max_items": 15,
+    "category_groups": {
+      "ai_tech": {
+        "name": "AI / 大模型 / 科技",
+        "limit": 7,
+        "categories": [
+          "ai",
+          "ai-oss",
+          "ai-tech",
+          "tech"
+        ]
+      },
+      "china_news": {
+        "name": "财经 / 国内政策",
+        "limit": 5,
+        "categories": [
+          "china-news"
+        ]
+      },
+      "international": {
+        "name": "国际新闻",
+        "limit": 4,
+        "categories": [
+          "international"
+        ]
+      }
+    },
+    "default_group": "other",
+    "default_group_limit": 2
   },
   "webhook": {
     "enabled": true,
